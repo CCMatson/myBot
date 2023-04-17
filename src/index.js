@@ -18,13 +18,23 @@ client.on('ready', (c) => {
 client.on('interactionCreate', (interaction) => {
   //this will only run in the interaction is a slash command
   if(!interaction.isChatInputCommand()) return ;
-  if (interaction.commandName === 'hey') {
-    interaction.reply('Sashay, Shante!');
+
+  if (interaction.commandName === 'add') {
+    //optional chaining will prevent crash if the required key in register-commands is false
+    const num1 = interaction.options.get('first-number')?.value;
+    const num2 = interaction.options.get('second-number')?.value;
+    console.log(num1 , 'num1')
+
+    interaction.reply(`The sum is ${num1 + num2}`)
   }
-  if (interaction.commandName === 'ping') {
-    interaction.reply('Pong!');
-  }
-  console.log(interaction.commandName);
+
+  // if (interaction.commandName === 'hey') {
+  //   interaction.reply('Sashay, Shante!');
+  // }
+  // if (interaction.commandName === 'ping') {
+  //   interaction.reply('Pong!');
+  // }
+  // console.log(interaction.commandName);
 })
 
 // client.on('messageCreate', msg => {
