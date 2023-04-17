@@ -15,12 +15,30 @@ client.on('ready', (c) => {
   console.log(`Logged in as ${c.user.tag}!`)
 })
 
-client.on('messageCreate', msg => {
-  // console.log('pong')
-  if (msg.content === 'ping') {
-    console.log('pong')
-    msg.reply('Pong!');
+client.on('interactionCreate', (interaction) => {
+  //this will only run in the interaction is a slash command
+  if(!interaction.isChatInputCommand()) return ;
+  if (interaction.commandName === 'hey') {
+    interaction.reply('Sashay, Shante!');
   }
-});
+  if (interaction.commandName === 'ping') {
+    interaction.reply('Pong!');
+  }
+  console.log(interaction.commandName);
+})
+
+// client.on('messageCreate', msg => {
+//   //will not reply to bots, prevents loops
+//   if (msg.author.bot){
+//     return;
+//   }
+//   if (msg.content === 'sashay'){
+//     msg.reply('Shantay!');
+//   }
+  
+//   if (msg.content === 'ping') {
+//     msg.reply('Pong!');
+//   }
+// });
 
 client.login(process.env.CLIENT_TOKEN)
